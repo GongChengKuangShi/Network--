@@ -20,9 +20,19 @@
  
     _tool = [[NetworkTool alloc] init];
     _tool.delegate = self;
-    [self setNetwork];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(150, 200, 200, 300);
+    button.backgroundColor = [UIColor cyanColor];
+    [button addTarget:self action:@selector(touchButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
+    
 }
 
+- (void)touchButton {
+    [self setNetwork];
+}
 
 
 - (void)setNetwork {

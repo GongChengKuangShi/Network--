@@ -27,6 +27,27 @@
 
 @implementation NetworkTool
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        _manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        _manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"app3" ofType:@"cer"];
+        NSData * certData =[NSData dataWithContentsOfFile:cerPath];
+        NSSet * certSet = [[NSSet alloc] initWithObjects:certData, nil];
+        /** 网络安全证书*/
+        //        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+        //        securityPolicy.allowInvalidCertificates = YES;
+        //        securityPolicy.validatesDomainName = YES;
+        //        securityPolicy.pinnedCertificates = certSet;
+        //        _manager.securityPolicy = securityPolicy;
+    }
+    return self;
+}
+
+
 - (void)getWithUrlString:(NSString *)string
               parameters:(NSArray *)parameterArray
             unParameters:(NSDictionary *)dictionary {
